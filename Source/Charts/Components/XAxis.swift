@@ -46,6 +46,9 @@ open class XAxis: AxisBase
     /// the position of the x-labels relative to the chart
     @objc open var labelPosition = LabelPosition.top
     
+    /// anchor point of label
+    @objc open var labelAnchorPoint = CGPoint(x: CGFloat.nan, y: CGFloat.nan)
+    
     /// if set to true, word wrapping the labels will be enabled.
     /// word wrapping is done using `(value width * labelRotatedWidth)`
     ///
