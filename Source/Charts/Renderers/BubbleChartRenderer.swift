@@ -29,7 +29,7 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
     open override func drawData(context: CGContext)
     {
         guard
-            let dataProvider = dataProvider,
+            let dataProvider,
             let bubbleData = dataProvider.bubbleData
             else { return }
         
@@ -240,7 +240,7 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
     open override func drawHighlighted(context: CGContext, indices: [Highlight])
     {
         guard
-            let dataProvider = dataProvider,
+            let dataProvider,
             let bubbleData = dataProvider.bubbleData
             else { return }
 

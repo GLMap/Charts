@@ -517,7 +517,7 @@ open class LineChartRenderer: LineRadarRenderer
     open override func drawValues(context: CGContext)
     {
         guard
-            let dataProvider = dataProvider,
+            let dataProvider,
             let lineData = dataProvider.lineData
         else { return }
 
@@ -607,7 +607,7 @@ open class LineChartRenderer: LineRadarRenderer
     private func drawCircles(context: CGContext)
     {
         guard
-            let dataProvider = dataProvider,
+            let dataProvider,
             let lineData = dataProvider.lineData
         else { return }
         
@@ -750,7 +750,7 @@ open class LineChartRenderer: LineRadarRenderer
     open override func drawHighlighted(context: CGContext, indices: [Highlight])
     {
         guard
-            let dataProvider = dataProvider,
+            let dataProvider,
             let lineData = dataProvider.lineData
         else { return }
         

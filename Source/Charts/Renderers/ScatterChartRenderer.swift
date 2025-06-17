@@ -103,7 +103,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
     open override func drawValues(context: CGContext)
     {
         guard
-            let dataProvider = dataProvider,
+            let dataProvider,
             let scatterData = dataProvider.scatterData
             else { return }
         
@@ -194,7 +194,7 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
     open override func drawHighlighted(context: CGContext, indices: [Highlight])
     {
         guard
-            let dataProvider = dataProvider,
+            let dataProvider,
             let scatterData = dataProvider.scatterData
             else { return }
         

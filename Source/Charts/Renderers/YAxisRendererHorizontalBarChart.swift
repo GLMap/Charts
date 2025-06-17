@@ -25,7 +25,7 @@ open class YAxisRendererHorizontalBarChart: YAxisRenderer
         var min = min, max = max
         
         // calculate the starting and entry point of the y-labels (depending on zoom / contentrect bounds)
-        if let transformer = transformer,
+        if let transformer,
             viewPortHandler.contentHeight > 10.0,
             !viewPortHandler.isFullyZoomedOutX
         {

@@ -83,7 +83,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     private func prepareBuffer(dataSet: BarChartDataSetProtocol, index: Int)
     {
         guard
-            let dataProvider = dataProvider,
+            let dataProvider,
             let barData = dataProvider.barData
             else { return }
         
@@ -257,7 +257,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     open override func drawData(context: CGContext)
     {
         guard
-            let dataProvider = dataProvider,
+            let dataProvider,
             let barData = dataProvider.barData
             else { return }
         
@@ -433,7 +433,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         if isDrawingValuesAllowed(dataProvider: dataProvider)
         {
             guard
-                let dataProvider = dataProvider,
+                let dataProvider,
                 let barData = dataProvider.barData
                 else { return }
 
@@ -690,7 +690,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
     open override func drawHighlighted(context: CGContext, indices: [Highlight])
     {
         guard
-            let dataProvider = dataProvider,
+            let dataProvider,
             let barData = dataProvider.barData
             else { return }
         
@@ -816,7 +816,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 dataSetIndex: dataSetIndex,
                 viewPortHandler: viewPortHandler)
 
-            if let stackLabel = stackLabel {
+            if let stackLabel {
                 elementValueText = stackLabel + " \(elementValueText)"
             } else {
                 elementValueText = "\(elementValueText)"

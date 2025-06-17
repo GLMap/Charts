@@ -102,7 +102,7 @@ open class DefaultValueFormatter: NSObject, ValueFormatter
                              dataSetIndex: Int,
                              viewPortHandler: ViewPortHandler?) -> String
     {
-        if let block = block {
+        if let block {
             return block(value, entry, dataSetIndex, viewPortHandler)
         } else {
             return formatter?.string(from: NSNumber(floatLiteral: value)) ?? ""

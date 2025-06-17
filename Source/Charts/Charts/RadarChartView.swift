@@ -86,7 +86,7 @@ open class RadarChartView: PieRadarChartViewBase
         _yAxisRenderer?.computeAxis(min: _yAxis._axisMinimum, max: _yAxis._axisMaximum, inverted: _yAxis.isInverted)
         _xAxisRenderer?.computeAxis(min: xAxis._axisMinimum, max: xAxis._axisMaximum, inverted: false)
         
-        if let data = data,
+        if let data,
             !legend.isLegendCustom
         {
             legendRenderer.computeLegend(data: data)

@@ -492,7 +492,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     {
         // if there is no marker view or drawing marker is disabled
         guard
-            let marker = marker,
+            let marker,
             isDrawMarkersEnabled,
             valuesToHighlight()
             else { return }

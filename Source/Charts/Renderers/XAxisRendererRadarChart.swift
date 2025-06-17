@@ -26,7 +26,7 @@ open class XAxisRendererRadarChart: XAxisRenderer
     open override func renderAxisLabels(context: CGContext)
     {
         guard
-            let chart = chart,
+            let chart,
             axis.isEnabled,
             axis.isDrawLabelsEnabled
             else { return }

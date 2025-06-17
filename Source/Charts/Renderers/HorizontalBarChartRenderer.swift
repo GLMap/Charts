@@ -320,7 +320,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
         if isDrawingValuesAllowed(dataProvider: dataProvider)
         {
             guard
-                let dataProvider = dataProvider,
+                let dataProvider,
                 let barData = dataProvider.barData
                 else { return }
 

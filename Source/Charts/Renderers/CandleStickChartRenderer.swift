@@ -25,7 +25,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
     
     open override func drawData(context: CGContext)
     {
-        guard let dataProvider = dataProvider, let candleData = dataProvider.candleData else { return }
+        guard let dataProvider, let candleData = dataProvider.candleData else { return }
 
         // If we redraw the data, remove and repopulate accessible elements to update label values and frames
         accessibleChartElements.removeAll()
@@ -268,7 +268,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
     open override func drawValues(context: CGContext)
     {
         guard
-            let dataProvider = dataProvider,
+            let dataProvider,
             let candleData = dataProvider.candleData
             else { return }
         
@@ -353,7 +353,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
     open override func drawHighlighted(context: CGContext, indices: [Highlight])
     {
         guard
-            let dataProvider = dataProvider,
+            let dataProvider,
             let candleData = dataProvider.candleData
             else { return }
         

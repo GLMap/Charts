@@ -35,7 +35,7 @@ open class RadarChartRenderer: LineRadarRenderer
     
     open override func drawData(context: CGContext)
     {
-        guard let chart = chart,
+        guard let chart,
               let radarData = chart.data as? RadarChartData else
         {
             return
@@ -192,7 +192,7 @@ open class RadarChartRenderer: LineRadarRenderer
     open override func drawValues(context: CGContext)
     {
         guard
-            let chart = chart,
+            let chart,
             let data = chart.data
             else { return }
         
@@ -269,7 +269,7 @@ open class RadarChartRenderer: LineRadarRenderer
     @objc open func drawWeb(context: CGContext)
     {
         guard
-            let chart = chart,
+            let chart,
             let data = chart.data
             else { return }
         
@@ -338,7 +338,7 @@ open class RadarChartRenderer: LineRadarRenderer
     open override func drawHighlighted(context: CGContext, indices: [Highlight])
     {
         guard
-            let chart = chart,
+            let chart,
             let radarData = chart.data as? RadarChartData
             else { return }
         

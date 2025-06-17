@@ -38,7 +38,7 @@ open class PieChartRenderer: NSObject, DataRenderer
     
     open func drawData(context: CGContext)
     {
-        guard let chart = chart, let pieData = chart.data else { return }
+        guard let chart, let pieData = chart.data else { return }
 
         // If we redraw the data, remove and repopulate accessible elements to update label values and frames
         accessibleChartElements.removeAll()
@@ -297,7 +297,7 @@ open class PieChartRenderer: NSObject, DataRenderer
     open func drawValues(context: CGContext)
     {
         guard
-            let chart = chart,
+            let chart,
             let data = chart.data
             else { return }
 
@@ -652,7 +652,7 @@ open class PieChartRenderer: NSObject, DataRenderer
     private func drawCenterText(context: CGContext)
     {
         guard
-            let chart = chart,
+            let chart,
             let centerAttributedText = chart.centerAttributedText
             else { return }
 
@@ -700,7 +700,7 @@ open class PieChartRenderer: NSObject, DataRenderer
     open func drawHighlighted(context: CGContext, indices highlights: [Highlight])
     {
         guard
-            let chart = chart,
+            let chart,
             let data = chart.data
             else { return }
 

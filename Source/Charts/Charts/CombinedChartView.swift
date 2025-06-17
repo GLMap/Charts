@@ -209,7 +209,7 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
     override func drawMarkers(context: CGContext)
     {
         guard
-            let marker = marker, 
+            let marker, 
             isDrawMarkersEnabled && valuesToHighlight()
             else { return }
         

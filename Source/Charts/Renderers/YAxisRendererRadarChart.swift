@@ -131,7 +131,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
     open override func renderAxisLabels(context: CGContext)
     {
         guard
-            let chart = chart,
+            let chart,
             axis.isEnabled,
             axis.isDrawLabelsEnabled
             else { return }
@@ -168,7 +168,7 @@ open class YAxisRendererRadarChart: YAxisRenderer
     open override func renderLimitLines(context: CGContext)
     {
         guard
-            let chart = chart,
+            let chart,
             let data = chart.data
             else { return }
         

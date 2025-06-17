@@ -37,7 +37,7 @@ public class LargeValueFormatter: NSObject, ValueFormatter, AxisValueFormatter {
         
         var r = String(format: "%2.f", sig) + suffix[length]
         
-        if let appendix = appendix {
+        if let appendix {
             r += appendix
         }
         

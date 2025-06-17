@@ -28,7 +28,7 @@ public class DayAxisValueFormatter: NSObject, AxisValueFormatter {
         let monthName = months[month % months.count]
         let yearName = "\(year)"
         
-        if let chart = chart,
+        if let chart,
             chart.visibleXRange > 30 * 6 {
             return monthName + yearName
         } else {
