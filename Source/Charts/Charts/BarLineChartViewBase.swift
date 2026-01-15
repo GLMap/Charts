@@ -32,6 +32,8 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     private var _doubleTapToZoomEnabled = true
     private var _dragXEnabled = true
     private var _dragYEnabled = true
+    private var _draggingHighlight = false
+
     
     private var _scaleXEnabled = true
     private var _scaleYEnabled = true
@@ -687,11 +689,31 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 return
             }
             
+            let loc = recognizer.location(in: self)
+            let hitRadius: CGFloat = 16 // tweak as needed
+            if let last = lastHighlighted {
+                // Recompute pixel position for the highlighted value using the current transform
+                let transformer = getTransformer(forAxis: last.axis)
+                let lastPixel = transformer.pixelForValues(x: last.x, y: last.y)
+                let dx = loc.x - lastPixel.x
+                let dy = loc.y - lastPixel.y
+                _draggingHighlight = (dx*dx + dy*dy) <= (hitRadius * hitRadius)
+            } else {
+                _draggingHighlight = false
+            }
+            
             // If drag is enabled and we are in a position where there's something to drag:
             //  * If we're zoomed in, then obviously we have something to drag.
             //  * If we have a drag offset - we always have something to drag
-            if recognizer.nsuiNumberOfTouches() >= 2
+            if self.isHighlightPerDragEnabled && _draggingHighlight
             {
+                // We will only handle highlights on NSUIGestureRecognizerState.Changed
+                
+                _isDragging = false
+                
+                // Prevent the parent scroll view from scrolling
+                _outerScrollView?.nsuiIsScrollEnabled = false
+            } else {
                 _isDragging = true
                 
                 _closestDataSetToTouch = getDataSetByTouchPoint(point: recognizer.nsuiLocationOfTouch(0, inView: self))
@@ -729,16 +751,6 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 
                 _lastPanPoint = recognizer.translation(in: self)
             }
-            else if self.isHighlightPerDragEnabled
-            {
-                // We will only handle highlights on NSUIGestureRecognizerState.Changed
-                
-                _isDragging = false
-                
-                // Prevent the parent scroll view from scrolling
-                _outerScrollView?.nsuiIsScrollEnabled = false
-
-            }
         }
         else if recognizer.state == NSUIGestureRecognizerState.changed
         {
@@ -760,7 +772,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                 
                 _lastPanPoint = originalTranslation
             }
-            else if isHighlightPerDragEnabled
+            else if isHighlightPerDragEnabled && _draggingHighlight
             {
                 let h = getHighlightByTouchPoint(recognizer.location(in: self))
                 
@@ -1957,3 +1969,4 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         return min(xAxis._axisMaximum, Double(pt.x))
     }
 }
+
