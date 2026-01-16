@@ -678,6 +678,16 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     #endif
     
+    private func highlightPixelPoint(for highlight: Highlight) -> CGPoint {
+        let yValue = highlight.y.isNaN ? (data?.entry(for: highlight)?.y ?? 0.0) : highlight.y
+        let transformer = getTransformer(forAxis: highlight.axis)
+        if self is HorizontalBarChartView
+        {
+            return transformer.pixelForValues(x: yValue, y: highlight.x)
+        }
+        return transformer.pixelForValues(x: highlight.x, y: yValue)
+    }
+    
     @objc private func panGestureRecognized(_ recognizer: NSUIPanGestureRecognizer)
     {
         if recognizer.state == NSUIGestureRecognizerState.began && recognizer.nsuiNumberOfTouches() > 0
@@ -690,14 +700,15 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             }
             
             let loc = recognizer.location(in: self)
-            let hitRadius: CGFloat = 16 // tweak as needed
+            let hitRadius: CGFloat = 10+16 // 10 pt is needed to trigger pan gesture, and 16 is our circle width.
             if let last = lastHighlighted {
-                // Recompute pixel position for the highlighted value using the current transform
-                let transformer = getTransformer(forAxis: last.axis)
-                let lastPixel = transformer.pixelForValues(x: last.x, y: last.y)
-                let dx = loc.x - lastPixel.x
-                let dy = loc.y - lastPixel.y
-                _draggingHighlight = (dx*dx + dy*dy) <= (hitRadius * hitRadius)
+                let isHorizontal = self is HorizontalBarChartView
+                let lastPixel = highlightPixelPoint(for: last)
+                if isHorizontal {
+                    _draggingHighlight = abs(loc.y - lastPixel.y) <= hitRadius
+                } else {
+                    _draggingHighlight = abs(loc.x - lastPixel.x) <= hitRadius
+                }
             } else {
                 _draggingHighlight = false
             }
