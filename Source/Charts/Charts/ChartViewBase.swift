@@ -456,7 +456,8 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         }
 
         // set the indices to highlight
-       highlighted = [h]
+        highlighted = [h]
+        lastHighlighted = h
 
         if callDelegate
         {
