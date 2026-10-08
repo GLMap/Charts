@@ -5,9 +5,9 @@ import PackageDescription
 let package = Package(
     name: "DGCharts",
     platforms: [
-          .iOS(.v12),
-          .tvOS(.v12),
-          .macOS(.v10_12),
+          .iOS("15.0"),
+          .tvOS("15.0"),
+          .macOS("10.15"),
     ],
     products: [
         .library(
